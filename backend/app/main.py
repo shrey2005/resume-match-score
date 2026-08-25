@@ -1,6 +1,8 @@
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.routes.analyze import router as analyze_router
+
 app = FastAPI()
 
 app.add_middleware(
@@ -17,19 +19,4 @@ def health_check():
         "status": "ok"
     }
 
-ALLOWED_TYPES = {
-    "application/pdf",
-    "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-}
-
-@app.post("/api/analyze")
-async def analyze_file(resume: UploadFile = File(...), job_description: str = Form(...)):
-
-    if resume.content_type not in ALLOWED_TYPES:
-        return HTTPException(status_code=400, detail="Invalid file type. Only PDF and DOCX files are allowed.")
-    
-    return {
-        "filename": resume.filename,
-        "job_description": job_description,
-        "message": "File and job description received successfully."
-    }
+app.include_router(analyze_router, prefix="/api")
