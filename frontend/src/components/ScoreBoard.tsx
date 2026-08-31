@@ -52,7 +52,7 @@ const ScoreBoard = () => {
                     </h3>
 
                     <div className="flex flex-wrap gap-2">
-                        {result.matchedSkills.map((skill) => (
+                        {result?.matchedSkills?.map((skill) => (
                             <span
                                 key={skill}
                                 className="rounded-full bg-green-50 px-3 py-1.5 text-xs font-semibold text-green-700"
@@ -69,7 +69,7 @@ const ScoreBoard = () => {
                     </h3>
 
                     <div className="flex flex-wrap gap-2">
-                        {result.missingSkills.map((skill) => (
+                        {result?.missingSkills?.map((skill) => (
                             <span
                                 key={skill}
                                 className="rounded-full bg-red-50 px-3 py-1.5 text-xs font-semibold text-red-600"
@@ -87,7 +87,7 @@ const ScoreBoard = () => {
                 </h3>
 
                 <ul className="space-y-2 pl-5 text-gray-500">
-                    {result.recommendations.map(
+                    {result?.recommendations?.map(
                         (recommendation, index) => (
                             <li key={`${recommendation}-${index}`}>
                                 {recommendation}
